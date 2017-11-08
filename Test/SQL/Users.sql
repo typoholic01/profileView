@@ -5,7 +5,7 @@ CASCADE;
 --테이블 생성
 CREATE TABLE Users(
 	uid VARCHAR(50) NOT NULL UNIQUE,
-	nickname VARCHAR(10) NOT NULL,
+	name VARCHAR(10) NOT NULL,
 	password VARCHAR(64) NOT NULL,
 	auth SMALLINT(3) UNSIGNED DEFAULT 1 NOT NULL,
 	status SMALLINT(3) UNSIGNED DEFAULT 1 NOT NULL,
@@ -17,7 +17,7 @@ SELECT * FROM USERS;
 
 --데이터 입력
 INSERT INTO Users(
-			uid, nickname, password, auth
+			uid, name, password, auth
 		)
 		VALUES(
 			'typoholic01@gmail.com', '문성환', SHA2('test', 256), 3

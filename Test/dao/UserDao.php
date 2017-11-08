@@ -1,5 +1,6 @@
 <?php
 require "Conn.php";
+require "../vo/User.php";
 
 class UserDao
 {
@@ -20,11 +21,11 @@ class UserDao
               Users";
         $result = $conn->query($sql);
         
-        while($row = $result->fetch_array($resulttype = MYSQLI_ASSOC))
-        {
-            $rows[] = $row;
+        while ($user = $result->fetch_object('User')) {
+            $users[] = $user;
         }
-        return $rows;
+        
+        return $users;
     }
     
     //아이템 코드를 받아 아이템 이름을 출력한다
