@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>포트폴리오 올리기</title>
+  <!-- 									Bootstrap & jQuery & font-awesome 							-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+
+<script type="text/javascript">
+/* 파일 업로드 */
+$(document).on('click', '.browse', function(){
+	  var file = $(this).parent().parent().parent().find('.file');
+	  file.trigger('click');
+	});
+	$(document).on('change', '.file', function(){
+	  $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+	});
+</script>
+</head>
+<body>
+<div class="container">
+<form id="bbsWrite" action="./write.do" method="POST" enctype="multipart/form-data">
+<input type="hidden" name="bbsSeq" value="" />
+<input type="hidden" id="bbsContent" name="bbsContent" value="" />
+<div class="row">
+	<div class="col-sm-2">
+		<div class="form-group"> <!-- userId field -->
+			<label class="control-label " for="userId">아이디</label>
+			<input class="form-control" id="userId" name="userId" type="text" value="" readonly="readonly"/>
+		</div>
+	</div>
+	
+	<div class="col-sm-10">
+		<div class="form-group"> <!-- "title" field -->
+			<label class="control-label " for="title">제목</label>
+			<input class="form-control" id="bbsTitle" name="bbsTitle" type="text" value=""/>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group"> <!-- content field -->
+			<label class="control-label " for="content">내용</label>
+			<textarea class="form-control" rows="10" cols=""></textarea>
+		</div>
+	</div>
+</div>
+	
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group"> <!-- File field -->
+		   <input type="file" id="uploadFile" name="uploadFile" class="file" style="visibility: hidden;position: absolute;">
+		   <div class="input-group col-xs-12">
+		     <span class="input-group-addon"><i class="fa fa-file"></i></span>
+		     <input type="text" class="form-control input-lg" disabled placeholder="파일 업로드">
+		     <span class="input-group-btn">
+		       <button class="browse btn btn-primary input-lg" type="button"><i class="glyphicon glyphicon-search"></i> 파일</button>
+		     </span>
+		   </div>
+		</div>
+   </div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+		<div class="form-group pull-right">
+			<button class="btn btn-primary " name="button" type="button" onclick="bbsWrite();">글쓰기</button>
+		</div>
+	</div>
+</div>
+</form>
+</div>
+</body>
+</html>

@@ -36,6 +36,12 @@
 	</style>
 </head>
 <body>
+	<!-- Navbar -->
+	<?php
+	   include './view/common/topnav.php';
+	?>
+	
+	<!-- 본문 -->
 	<div class="container" style="    border-left: 1px solid #ededed;    border-right: 1px solid #ededed;    padding-right: 0px;">
 		<div class="row">
 		<aside class="col-sm-4">			
