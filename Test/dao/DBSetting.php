@@ -1,9 +1,9 @@
 <?php
 class DBSetting
 {
-  const host = "localhost:3307";
+  const host = "localhost";
   const user = "root";
   const pw = "";
-  const dbName = "test";
+  const dbName = "typoholic";
 
 }

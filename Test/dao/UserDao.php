@@ -4,13 +4,38 @@ require "../vo/User.php";
 
 class UserDao
 {
-    public function getUserList()
-    {        
+    
+    /******************************
+     *          CREATE 
+     ******************************/
+    public function insertUser($user) 
+    {
         $connClass = new Conn();
         
+        //접속
         $conn = $connClass->conn;
         
-        $tasks = [];
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        $sql = "INSERT INTO Users (uid, password, name)
+VALUES ('".$user->getUid()."','".$user->getPassword()."','".$user->getName()."')";
+        
+        return $conn->query($sql);
+        
+    }
+    
+    /******************************
+     *          READ
+     ******************************/
+    public function getUserList()
+    {
+        $connClass = new Conn();
+        
+        //접속
+        $conn = $connClass->conn;
         
         // Check connection
         if ($conn->connect_error) {
@@ -21,6 +46,7 @@ class UserDao
               Users";
         $result = $conn->query($sql);
         
+        //담기
         while ($user = $result->fetch_object('User')) {
             $users[] = $user;
         }
@@ -28,27 +54,28 @@ class UserDao
         return $users;
     }
     
-    //아이템 코드를 받아 아이템 이름을 출력한다
-    public function getItemName($ItemCode)
+    /******************************
+     *          UPDATE
+     ******************************/
+    public function updateUser($user)
     {
-        $conn = $this->conn;
+        $connClass = new Conn();
+        
+        //접속
+        $conn = $connClass->conn;
         
         // Check connection
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
         
-        $sql = "SELECT  QuickRepair, QuickMarionette, Marionette, Arms, Coin FROM
-              itemcodes
-              where ItemCode = '$ItemCode'";
+        $sql = "UPDATE Users
+                SET name = ".$user->getName().",
+    			    profile = ".$user->getProfile().",
+    			    photo = ".$user->getPhoto()."
+        		WHERE uid = ".$user->getUid();
         
-        $result = $conn->query($sql);
-        
-        while($row = $result->fetch_array($resulttype = MYSQLI_ASSOC))
-        {
-            $rows[] = $row;
-        }
-        return $rows;
+        return $conn->query($sql);
     }
 }
 ?>
