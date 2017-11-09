@@ -18,6 +18,9 @@ CREATE TABLE Users(
 --데이터 조회
 SELECT * FROM USERS;
 
+SELECT * FROM USERS
+WHERE UID = '123@gmail.com';
+
 --데이터 입력
 INSERT INTO Users(
 			uid, name, password, auth

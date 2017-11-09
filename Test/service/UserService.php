@@ -10,8 +10,15 @@ class UserService {
         return $userDao->insertUser($user);
         
     }
-    
     /* READ */
+    function getUser($user) {
+        $userDao = new UserDao();
+        
+        $login = $userDao->getUser($user);
+        
+        return $login;
+    }
+    
     function getUserList() {
         $userDao = new UserDao();
         

@@ -30,6 +30,36 @@ VALUES ('".$user->getUid()."','".$user->getPassword()."','".$user->getName()."')
     /******************************
      *          READ
      ******************************/
+    public function getUser($user)
+    {
+        $connClass = new Conn();
+        
+        //접속
+        $conn = $connClass->conn;
+        
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        
+        $sql = "SELECT * FROM
+              Users
+              WHERE uid = ".$user->getUid();
+        
+        if ($result = $conn->query($sql)) {
+            
+            /* fetch object array */
+            while ($login = $result->fetch_object('User')) {
+                /* free result set */
+                $result->close();
+                
+                return $login;
+            }
+            
+        }
+        
+    }
+    
     public function getUserList()
     {
         $connClass = new Conn();

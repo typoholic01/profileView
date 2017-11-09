@@ -1,7 +1,7 @@
 <?php
 require "../service/UserService.php";
 
-if(isset($_GET["uid"])){
+if(isset($_POST["uid"])){
     //init
     session_start();
     $userService = new UserService();
@@ -9,14 +9,16 @@ if(isset($_GET["uid"])){
     $login = new User();
     
     //set
-    $user->setUid($_GET["uid"]);
-    $user->setPassword($_GET["password"]);
+    $user->setUid($_POST["uid"]);
+    $user->setPassword($_POST["password"]);
     
     var_dump($user);
     
     //run
     $login = $userService->getUser($user);
+    
     if ($login === null) {
+        
         header("Location: ../view/user/fail.html");
     } else {
         // Set session variables
